@@ -14,6 +14,7 @@ class UserConfig:
         'baidu_analytics': 'd29cbc81c9e1d3169b28db3002ed0f6f',
         'disqus': 'csw-blog',
         'blogger': {
+            'avatar': 'avatar.jpg',
             'desc': ['Siwei Chen', 'aka vc12345679 elsewhere', '但行好事，莫问前程', '90后单身汪', '收信快乐的瘦皮猴', '生在长三角却偏爱面食',
                      '涉猎广而不精', '后悔没选工科的理科生', '山地车爱好者', '还我托德、布朗、舒马赫', '烘焙是件很有趣的事'],
             'contact': [
