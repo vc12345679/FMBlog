@@ -1,0 +1,8 @@
+{% extends "pagination.html" %}
+
+{% block title %}搜索: {{ value['keyword']|safe }} - {{ site.name }} {% endblock %}
+{% block pagination_desc%}
+    <span>含有关键字 	</span>
+	<strong class="text-primary">{{ value['keyword'] |safe}}</strong>
+	<span>的博文</span>
+{% endblock %}

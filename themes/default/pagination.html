@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block jumbotron %}
+<div class="jumbotron text-center p-b m-t-md">
+	<h1><strong>{{ site.name }}</strong></h1>
+	<h2><small>{{ site.desc }}</small></h2>
+</div>
+{% endblock %}
+{% block content %}
+<div class="col-lg-3 text-center">
+	{% block about_blogger %}
+	<div class="card" id="about_card">
+		<h4 class="card-title bg-inverse"><i class="fa fa-user"></i> 关于博主</h4>
+		<img src="{{url_for('static', filename='avatar.jpg')}}" style="width: 60%;" alt="logo" />
+		<div class="card-block p-a-0">
+			<div class="card-text">
+				<ul class="list-unstyled">
+					{%if site.blogger.desc%}
+					{% for itm in site.blogger.desc %}
+					<li>{{ itm }}</li>
+					{% endfor %}
+					{%else%}
+					<li>暂无</li>
+					{%endif%}
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	{% block contact_me %}
+	<div class="card" id="contact_card">
+		<h4 class="card-title bg-inverse"><i class="fa fa-phone"></i> 联系我</h4>
+		<div class="card-block p-a-0">
+			<div class="card-text">
+				<ul class="list-inline">
+					{% if site.blogger.contact %}
+					{% for itm in site.blogger.contact %}
+					<li>
+						<a target="_blank" href="{{itm.link}}"><i class="fa {{itm.logo}} fa-fw"></i></a>
+					</li>
+					{% endfor %}
+					{%else%}
+					<li>暂无</li>
+					{%endif%}
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</div>
+<div class="col-lg-6">
+	{{ render_pagination(pagination, endpoint, value) }}
+</div>
+{% block rightsidebar%}
+<div class="col-lg-3 text-center">
+	{% block cat_card %}
+	<div class="card" id="category_card">
+		<h4 class="card-title bg-inverse"><i class="fa fa-folder fa-fw"></i> 分类</h4>
+		<div class="card-block p-t-0 p-b-0">
+			<div class="card-text text-left">
+				<ul class="list-unstyled">
+					{%if cats%}
+					{% for itm in cats %}
+					<li>
+						<a href="{{url_for('main.category', cat_name=itm.name)}}" class="text-primary">
+							<i class="fa fa-folder"></i> {{itm.name}} <span class="label text-warning bg-faded pull-right"> {{itm.count}} </span></a>
+					</li>
+					{% endfor %}
+					{%else%}
+					<li>暂无</li>
+					{%endif%}
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	{% block tag_card %}
+	<div class="card" id="tag_card">
+		<h4 class="card-title bg-inverse"><i class="fa fa-tags"></i> 标签</h4>
+		<div class="card-block p-t-0 p-b-0">
+			<div class="card-text text-left p-t-0">
+				<ul class="list-inline">
+					{%if tags%}
+					{% for itm in tags %}
+					<li class="label bg-success">
+						<a href="{{url_for('main.tag', tag_name=itm.name)}}"> {{itm.name}} <span class="label text-muted">{{itm.count}}</span></a>
+					</li>
+					{% endfor %}
+					{%else%}
+					<li>暂无</li>
+					{%endif%}
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</div>
+{% endblock %}
+{% endblock %}
+
+{% macro render_pagination(pagination, endpoint, value)%}
+	<div class="card-block p-a-0 text-left m-b">
+		<div>
+			<span class="p-l"><i class="fa fa-info-circle"></i></span>
+			{% block pagination_desc%}{% endblock %}<span>共  {{ pagination.total }} 篇，当前显示第
+				{% if pagination.total == 0 %}
+				0
+				{%else%}
+				{{pagination.per_page*(pagination.page-1)+1}}  
+				{%if pagination.page < pagination.pages %}
+					- {{pagination.per_page*pagination.page}}
+				{% elif pagination.total % pagination.per_page != 1 %}
+					- {{ pagination.total}}
+				{% endif %}
+				{% endif %}
+				篇 </span>
+		</div>
+	</div>
+{% for itm in pagination.items %}
+<div class="card">
+	<div class="card-block">
+		<div class="card-title m-a-0">
+			<h4><a href="{{url_for('main.blog',post_name=itm.link)|safe}}"><strong>{{itm.title}}</strong></a></h4>
+		</div>
+		<div class="card-text">
+			<div class="text-muted">
+				<small><i class="fa fa-clock-o"> {{itm.date}}</i> / <i class="fa fa-user"> {{itm.author}}</i></small>
+			</div>
+			<div>
+				<p class="lead">{{itm.summary}}</p>
+			</div>
+			<div>
+				{% for tagitm in itm.tags %}
+				<span>
+					<small><i class="fa fa-tag"></i></small>
+					<span class="label bg-success"><a href="{{url_for('main.tag',tag_name=tagitm.name)}}">{{tagitm.name}}</a></span>
+				</span>
+				{% endfor %}
+				{% for catitm in itm.categories %}
+				<span class="pull-right">
+						<a href="{{url_for('main.category',cat_name=catitm.name)}}"><small><i class="fa fa-folder"></i> {{catitm.name}}</small></a>
+				</span>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+<div class="text-center">
+	<ul class="pagination pull-left">
+		<li {% if not pagination.has_prev %} class="disabled" {% endif %}>
+			<a {% if pagination.has_prev %}href="{{url_for(endpoint, page=pagination.prev_num, **value)}}" {% endif %}><i class="fa fa-angle-double-left fa-lg" ></i> 上一页</a>
+		</li>
+	</ul>
+	<ul class="pagination m-t">
+		{% for num in page_list %}
+		<li {%if num ==pagination.page %} class="active" {% endif %}>
+		{% if num==0 %}
+		...
+		{% else %}
+			<a href="{{url_for(endpoint, page=num, **value)}}">{{num}}{%if num==pagination.page%}<span class="sr-only">(current)</span>{%endif%}</a>
+		{% endif %}
+		</li>
+		{% endfor %}
+	</ul>
+	<ul class="pagination pull-right">
+		<li {% if not pagination.has_next %} class="disabled" {% endif %}>
+			<a {% if pagination.has_next %}href="{{url_for(endpoint, page=pagination.next_num, **value)}}" {% endif %}>下一页 <i class="fa fa-angle-double-right fa-lg"></i></a>
+		</li>
+	</ul>
+</div>
+{% endmacro %}

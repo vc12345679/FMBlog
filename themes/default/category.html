@@ -1,0 +1,9 @@
+{% extends "pagination.html" %}
+
+{% block title %}分类: {{ value.cat_name|safe }} - {{ site.name }} {% endblock %}
+{% block pagination_desc%}
+	<span>分类 </span>
+	<small class="text-primary"><i class="fa fa-folder fa-fw"></i></small>
+	<strong class="text-primary">{{ value.cat_name |safe}}</strong>
+	<span>下的博文</span>
+{% endblock %}

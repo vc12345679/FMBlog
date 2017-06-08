@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block title %} {{ post.title }} - {{site.name}}{% endblock %} {% block jumbotron %}
+<div class="jumbotron text-center p-b m-t-md">
+	<div class="row text-center">
+		<h4>[{{ site.name }}] {{post.title}}</h4> {{post.summary}}
+	</div>
+</div>
+{% endblock %} {% block content %}
+<div class="col-lg-1"></div>
+<div class="col-lg-8">
+	<div class="card">
+		<h3 class="card-title text-center bg-inverse m-a-0 p-t">
+				{{post.title}}
+		</h3>
+		<div class="row-fluid m-a-0 p-t bg-inverse text-center p-b">
+			<i class="fa fa-clock-o"> </i> {{post.date}} /
+			<i class="fa fa-user"> </i> {{post.author}}
+		</div>
+		<div class="card-block">
+			<div class="card-text">{{ post.html|safe }}</div>
+		</div>
+		<div class="p-a" style="border-top:ridge">
+			{% for tagitm in post.tags %}
+			<span>
+					<small><i class="fa fa-tag"></i></small>
+					<span class="label bg-success"><a href="{{url_for('main.tag',tag_name=tagitm.name)}}">{{tagitm.name}}</a></span>
+			</span>
+			{% endfor %} {% for catitm in post.categories %}
+			<span class="pull-right">
+						<a href="{{url_for('main.category',cat_name=catitm.name)}}"><small><i class="fa fa-folder"></i> {{catitm.name}}</small></a>
+				</span> {% endfor %}
+		</div>
+	</div>
+	{% include 'functions/comment.html' %}
+</div>
+<div class="col-lg-3 text-center">
+	<div class="card">
+		<h4 class="card-title bg-inverse"><i class="fa fa-tags fa-fw"></i> 同标签</h4>
+		<div class="card-block p-t-0 p-b-0">
+			<div class="card-text text-left">
+				<ul class="list-unstyled">
+					{%if posts_tag%} {%for itm in posts_tag%}
+					<li>
+						<a href="{{url_for('main.blog',post_name=itm.link)|safe}}">
+							<i class="fa fa-file fa-fw"></i>{{itm.title}}</a>
+					</li>
+					{%endfor%} {%else%}
+					<li>
+						暂无
+					</li>
+					{%endif%}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="card">
+		<h4 class="card-title bg-inverse"><i class="fa fa-folder fa-fw"></i> 同分类</h4>
+		<div class="card-block p-t-0 p-b-0">
+			<div class="card-text text-left">
+				<ul class="list-unstyled">
+					{%if posts_cat%} {%for itm in posts_cat%}
+					<li>
+						<a href="{{url_for('main.blog',post_name=itm.link)|safe}}">
+							<i class="fa fa-file fa-fw"></i>{{itm.title}}</a>
+					</li>
+					{%endfor%} {%else%}
+					<li>
+						暂无
+					</li>
+					{%endif%}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

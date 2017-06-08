@@ -1,0 +1,8 @@
+{% extends "pagination.html" %}
+
+{% block title %}标签: {{ value.tag_name|safe }} - {{ site.name }} {% endblock %}
+{% block pagination_desc%}
+	<span>具有标签 	</span>
+	<small><i class="fa fa-tag fa-fw"></i></small><span class="label bg-success">{{ value.tag_name |safe}}</span>
+	<span>的博文</span>
+{% endblock %}

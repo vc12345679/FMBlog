@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+/.idea/*
+/blogs/*
+/data-dev.sqlite
+/app/static/*
+themes/default/.project
