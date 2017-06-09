@@ -57,7 +57,7 @@ class KaTeXInlineLexer(InlineLexer):
         self.rules.inlinekatex = re.compile(r'^\${2}([\s\S]*?)\${2}(?!\$)')  # $tex$
         self.default_rules.insert(3, 'inlinekatex')
         self.rules.textsuppl = re.compile(r'^[\s\S]+?(?=\$)')
-        self.default_rules.insert(-1, 'textsuppl')
+        self.default_rules.append('textsuppl')
 
     def output_inlinekatex(self, m):
         return self.renderer.inlinekatex(m.group(1))
