@@ -54,17 +54,12 @@ class KaTeXInlineLexer(InlineLexer):
         self.enable_katexinline()
 
     def enable_katexinline(self):
-        self.rules.inlinekatex = re.compile(r'^\${2}([\s\S]*?)\${2}(?!\$)')  # $tex$
+        self.rules.inlinekatex = re.compile(r'^\${2}([\s\S]*?)\${2}(?!\$)')  # $$tex$$
         self.default_rules.insert(3, 'inlinekatex')
-        self.rules.textsuppl = re.compile(r'^[\s\S]+?(?=\$)')
-        self.default_rules.append('textsuppl')
+        self.rules.text = re.compile(r'^[\s\S]+?(?=[\\<!\[_*`~\$]|https?://| {2,}\n|$)')
 
     def output_inlinekatex(self, m):
         return self.renderer.inlinekatex(m.group(1))
-
-    def output_textsuppl(self, m):
-        text = m.group(0)
-        return self.renderer.text(text)
 
 
 class KaTeXBlockLexer(BlockLexer):
@@ -73,7 +68,7 @@ class KaTeXBlockLexer(BlockLexer):
         self.enable_katexblock()
 
     def enable_katexblock(self):
-        self.rules.blockkatex = re.compile(r'^\\\\\[(.*?)\\\\\]', re.DOTALL)  # \[ ... \]
+        self.rules.blockkatex = re.compile(r'^\\\\\[(.*?)\\\\\]', re.DOTALL)  # \\[ ... \\]
         self.default_rules.insert(0, 'blockkatex')
 
     def parse_blockkatex(self, m):
