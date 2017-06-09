@@ -6,7 +6,6 @@ __author__ = 'Siwei Chen<me@chensiwei.space'
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
-from flask_bootstrap import Bootstrap
 import os
 
 from config import config
@@ -20,8 +19,6 @@ def create_app(config_name):
     app.template_folder = os.path.join(os.path.abspath('themes'), app.config['FMBLOG_THEME'])
     moment = Moment()
     moment.init_app(app)
-    bootstrap = Bootstrap()
-    bootstrap.init_app(app)
     config[config_name].init_app(app)
     db.init_app(app)
 
