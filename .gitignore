@@ -105,3 +105,4 @@ ENV/
 /data-dev.sqlite
 /app/static/*
 themes/default/.project
+/user_config.py

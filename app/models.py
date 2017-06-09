@@ -104,37 +104,39 @@ class Blog:
 
     @classmethod
     def add(cls, file_name):
-        blog_info, txt, html, mtime = cls.get_blog(file_name)
-        if len(blog_info) > 0:
-            p = Post.query.filter_by(name=file_name).first()
-            if p is None:
-                p = Post(name=file_name)
-            p.title = blog_info['title']
-            p.author = blog_info['author']
-            p.content = txt
-            p.html = html
-            p.summary = blog_info['summary']
-            p.date = datetime.datetime.strptime(str(blog_info['date']), '%Y-%m-%d').date()
-            p.mtime = mtime
-            p.tags = []
-            for itm in blog_info['tag']:
-                tag = Tag.query.filter_by(name=itm).first()
-                if tag is None:
-                    db.session.add(Tag(itm))
-                    db.session.commit()
+        r = cls.get_blog(file_name)
+        if r is not None:
+            blog_info, txt, html, mtime = r
+            if len(blog_info) > 0:
+                p = Post.query.filter_by(name=file_name).first()
+                if p is None:
+                    p = Post(name=file_name)
+                p.title = blog_info['title']
+                p.author = blog_info['author']
+                p.content = txt
+                p.html = html
+                p.summary = blog_info['summary']
+                p.date = datetime.datetime.strptime(str(blog_info['date']), '%Y-%m-%d').date()
+                p.mtime = mtime
+                p.tags = []
+                for itm in blog_info['tag']:
                     tag = Tag.query.filter_by(name=itm).first()
-                p.tags.append(tag)
-            p.categories = []
-            for itm in blog_info['category']:
-                cat = Category.query.filter_by(name=itm).first()
-                if cat is None:
-                    db.session.add(Category(itm))
-                    db.session.commit()
+                    if tag is None:
+                        db.session.add(Tag(itm))
+                        db.session.commit()
+                        tag = Tag.query.filter_by(name=itm).first()
+                    p.tags.append(tag)
+                p.categories = []
+                for itm in blog_info['category']:
                     cat = Category.query.filter_by(name=itm).first()
-                p.categories.append(cat)
+                    if cat is None:
+                        db.session.add(Category(itm))
+                        db.session.commit()
+                        cat = Category.query.filter_by(name=itm).first()
+                    p.categories.append(cat)
 
-            db.session.add(p)
-            db.session.commit()
+                db.session.add(p)
+                db.session.commit()
 
     @classmethod
     def modify(cls, file_name):
