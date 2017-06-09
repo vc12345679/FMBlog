@@ -158,6 +158,7 @@ def blog(post_name):
         pt = pt[:7]
     if len(pc)>7:
         pc = pc[:7]
+    pct.sort(key=lambda item: item[0].date, reverse=True)
     value={}
     return render_template('blog.html',
                            post=post,
