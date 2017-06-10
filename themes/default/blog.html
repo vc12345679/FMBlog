@@ -16,7 +16,7 @@
 			<i class="fa fa-user"> </i> {{post.author}}
 		</div>
 		<div class="card-block">
-			<div class="card-text">{{ post.html|safe }}</div>
+			<div class="card-text" id="post_content">{{ post.html|safe }}</div>
 		</div>
 		<div class="p-a" style="border-top:ridge">
 			{% for tagitm in post.tags %}

@@ -1,0 +1,89 @@
+	body {
+		font-family: "Open Sans", "microsoft yahei", arial, helvetica, sans-serif;
+	}
+
+	.jumbotron,
+	nav {
+		box-shadow: 0 10px 5px #888888;
+	}
+
+	.label>a {
+		color: white;
+	}
+
+	.label>a:hover {
+		color: red;
+	}
+
+	li>a,
+	.card-title>h4>a,
+	.pagination>li>a {
+		color: black;
+	}
+
+	li>a:hover,
+	.card-title>h4>a:hover,
+	.pagination>li>a:hover {
+		color: #428bca;
+	}
+
+	.card-title {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		border-radius: 8px 8px 0 0;
+	}
+
+	.card {
+		box-shadow: 10px 10px 5px #888888;
+		border-radius: 8px;
+	}
+
+	html {
+		position: relative;
+		min-height: 100%;
+	}
+
+	footer {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+	}
+
+    #post_content>h1 {
+        font-weight: bold;
+        color: #000000;
+        border: 1px double #EEEEEE;
+        font-size: 28px;
+        padding: 10px;
+    }
+
+    #post_content>h2 {
+        font-weight: bold;
+        border-bottom: 2px dotted #DDDDDD;
+        color: #000000;
+        font-size: 24px;
+        padding-bottom: 8px;
+    }
+
+    #post_content>h3 {
+        font-weight: bold;
+        font-size: 18px;
+        padding-bottom: 6px;
+    }
+
+    #post_content>h4 {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #post_content>h5 {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    #post_content>h6 {
+        font-weight: bold;
+        color: #777777;
+        background-color: inherit;
+        font-size: 14px;
+    }
