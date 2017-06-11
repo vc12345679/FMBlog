@@ -6,6 +6,8 @@
 并使用 [mistune](https://github.com/lepture/mistune) 进行 Markdown解析
 的博客系统。
 
+FMBlog 当前版本 v0.1 alpha，仍在开发中。
+
 FMBlog 以 [BSD 3-Clause 许可证](https://github.com/vc12345679/FMBlog/blob/master/LICENSE)
 发布。
 
