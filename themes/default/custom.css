@@ -50,11 +50,12 @@ footer {
 }
 
 #post_content>h1 {
+	margin: 15px auto 15px;
 	font-weight: bold;
 	color: #000000;
-	border: 1px double #EEEEEE;
 	font-size: 28px;
-	padding: 10px;
+	border-bottom: double 3px black;
+	padding-bottom: 6px;
 }
 
 #post_content>h2 {
