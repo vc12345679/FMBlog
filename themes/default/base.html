@@ -65,6 +65,7 @@
 				</span>
 		</footer>
 		{% block jscript %} {% endblock %}
+		{% include 'functions/stylescript.html' %} {% include 'functions/math.html' %} {% include 'functions/highlight.html' %} {% include 'functions/analytics.html' %}
 		<script type="text/javascript">
 			$(document).ready(function() {
 				var height = $('footer').height();
@@ -73,7 +74,6 @@
 				});
 			});
 		</script>
-		{% include 'functions/stylescript.html' %} {% include 'functions/math.html' %} {% include 'functions/highlight.html' %} {% include 'functions/analytics.html' %}
 	</body>
 
 </html>
