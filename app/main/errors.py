@@ -1,7 +1,7 @@
-#!/usr/bin/venv python3
+#!/usr/bin/env python3
 # encoding=utf-8
 
-__author__ = 'Siwei Chen<me@chensiwei.space'
+__author__ = 'Siwei Chen<me@chensiwei.space>'
 
 from flask import render_template, current_app
 from . import main

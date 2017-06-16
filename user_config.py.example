@@ -1,6 +1,6 @@
 # encoding=utf-8
 
-__author__ = 'Siwei Chen<me@chensiwei.space'
+__author__ = 'Siwei Chen<me@chensiwei.space>'
 
 class UserConfig:
     FMBLOG_THEME = 'default'
