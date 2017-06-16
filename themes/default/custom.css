@@ -107,3 +107,6 @@ td {
 	background-color:#EEEEEE;
 }
 
+#footer>span>small>strong, #footer>span>small>a {
+	color: #428bca;
+}

@@ -52,10 +52,10 @@
 		<footer class="container-fluid bg-inverse text-center" id="footer">
 			<span>
 					<small>
-					Proudly Powered by: <a href="https://github.com/vc12345679/fmblog" style="color: #428bca;">
-					<strong>FMBlog</strong></a> v{{site.version}} - a <strong style="color: #428bca;">F</strong>lask-based, 
-					<strong style="color: #428bca;">M</strong>arkdown-supported, 
-						<strong style="color: #428bca;">Blog</strong> server
+					Proudly Powered by: <a href="https://github.com/vc12345679/fmblog">
+					<strong>FMBlog</strong></a> v{{site.version}} - a <strong>F</strong>lask-based, 
+					<strong>M</strong>arkdown-supported, 
+						<strong>Blog</strong> server
 					</small>
 				</span>
 			<span class="pull-right">
@@ -65,15 +65,11 @@
 				</span>
 		</footer>
 		{% block jscript %} {% endblock %}
-		{% include 'functions/stylescript.html' %} {% include 'functions/math.html' %} {% include 'functions/highlight.html' %} {% include 'functions/analytics.html' %}
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var height = $('footer').height();
-				$('body').css({
-					"margin-bottom": height
-				});
-			});
-		</script>
+		{% include 'functions/stylescript.html' %}
+		{% include 'functions/math.html' %}
+		{% include 'functions/highlight.html' %}
+		{% include 'functions/analytics.html' %}
+		{% include 'functions/stickyfooter.html' %}
 	</body>
 
 </html>
