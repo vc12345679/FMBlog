@@ -11,8 +11,8 @@ class UserConfig:
         'copyright_owner': '<a href="mailto:me@chensiwei.space">Siwei Chen</a>',
         'name': '花果山水帘洞',
         'desc': '一只瘦皮猴撒泼的地盘',
-        'baidu_analytics': 'd29cbc81c9e1d3169b28db3002ed0f6f',
-        'disqus': 'csw-blog',
+        'baidu_analytics': 'xxxxxxxxxxxxxxxxxxxx',
+        'disqus': 'xxxxxxxx',
         'blogger': {
             'avatar': 'avatar.jpg',
             'desc': ['Siwei Chen', 'aka vc12345679 elsewhere', '但行好事，莫问前程', '90后单身汪', '收信快乐的瘦皮猴', '生在长三角却偏爱面食',
