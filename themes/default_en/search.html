@@ -1,0 +1,7 @@
+{% extends "pagination.html" %}
+
+{% block title %}Search: {{ value['keyword']|safe }} - {{ site.name }} {% endblock %}
+{% block pagination_desc%}
+    <span>Posts with KEYWORD(S) 	</span>
+	<strong class="text-primary">{{ value['keyword'] |safe}}</strong>
+{% endblock %}

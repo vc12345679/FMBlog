@@ -1,0 +1,12 @@
+<script type="text/javascript" src="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" />
+<script type="text/javascript">
+	$("tex.tex-inline").each(
+		function(i, domElem) {
+			katex.render(domElem.innerText, domElem, {displayMode: false});
+		});
+	$("tex.tex-block").each(
+		function(i, domElem) {
+			katex.render(domElem.innerText, domElem, {displayMode: true});
+		});
+</script>

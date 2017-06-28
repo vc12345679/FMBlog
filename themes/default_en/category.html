@@ -1,0 +1,8 @@
+{% extends "pagination.html" %}
+
+{% block title %}Category: {{ value.cat_name|safe }} - {{ site.name }} {% endblock %}
+{% block pagination_desc%}
+	<span>Posts in CATEGORY </span>
+	<small class="text-primary"><i class="fa fa-folder fa-fw"></i></small>
+	<strong class="text-primary">{{ value.cat_name |safe}}</strong>
+{% endblock %}

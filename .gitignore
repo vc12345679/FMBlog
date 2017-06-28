@@ -104,5 +104,5 @@ ENV/
 /blogs/*
 /data-dev.sqlite
 /app/static/*
-themes/default/.project
+.project
 /user_config.py

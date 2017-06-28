@@ -3,7 +3,7 @@
 __author__ = 'Siwei Chen<me@chensiwei.space>'
 
 class UserConfig:
-    FMBLOG_THEME = 'default'
+    FMBLOG_THEME = 'default_en'
     FMBLOG_PER_PAGE = 10
     FMBLOG_SITE = {
         'version': '0.1 alpha',
