@@ -1,3 +1,5 @@
+[![Build Status](https://www.travis-ci.org/vc12345679/FMBlog.svg?branch=master)](https://www.travis-ci.org/vc12345679/FMBlog)
+
 # 关于FMBlog
 
 [FMBlog](https://github.com/vc12345679/FMBlog) = F(lask) + M(istune) + Blog

@@ -9,3 +9,5 @@ flask_script
 bs4
 pyyaml
 PyRSS2Gen
+pytest
+pytest-flask

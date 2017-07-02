@@ -6,7 +6,6 @@ __author__ = 'Siwei Chen<me@chensiwei.space>'
 from flask import render_template, current_app, request, url_for
 from app.models import Post, Tag, Category, Blog
 from . import main
-import os
 import datetime
 
 
@@ -45,17 +44,17 @@ def tag(tag_name):
 
 
 def get_page_list(pagination, page, itm_number=4):
-    if pagination.pages <= itm_number*2+1:
-        page_list = list(range(1, pagination.pages+1))
-    elif pagination.page <= itm_number+1:
-        page_list = list(range(1, itm_number*2))
-        page_list.append([0,pagination.pages])
+    if pagination.pages <= itm_number * 2 + 1:
+        page_list = list(range(1, pagination.pages + 1))
+    elif pagination.page <= itm_number + 1:
+        page_list = list(range(1, itm_number * 2))
+        page_list.append([0, pagination.pages])
     elif pagination.page >= pagination.pages - itm_number:
         page_list = [1, 0]
-        page_list.append(list(range(pagination.pages-itm_number*2+2,pagination.pages+1)))
+        page_list.append(list(range(pagination.pages - itm_number * 2 + 2, pagination.pages + 1)))
     else:
         page_list = [1, 0]
-        page_list.append(list(range(page-itm_number+2,page+itm_number-1)))
+        page_list.append(list(range(page - itm_number + 2, page + itm_number - 1)))
     return page_list
 
 
@@ -83,7 +82,7 @@ def feeds():
     full = request.args.get('full')
     posts = Post.query.order_by(Post.date.desc()).all()
     if not full:
-        posts = posts[:min(20,len(posts))]
+        posts = posts[:min(20, len(posts))]
     import PyRSS2Gen
     feed = []
     for itm in posts:
@@ -95,7 +94,7 @@ def feeds():
                                       description=itm.summary,
                                       guid=PyRSS2Gen.Guid(itm.md5),
                                       link=url_for('main.blog', _external=True, post_name=itm.link)
-                         ))
+                                      ))
     rss = PyRSS2Gen.RSS2(title=current_app.config['FMBLOG_SITE']['name'],
                          description=current_app.config['FMBLOG_SITE']['desc'],
                          lastBuildDate=datetime.datetime.now(),
@@ -115,11 +114,14 @@ def search(keyword):
     try:
         keywords = keyword.split()
         from sqlalchemy import and_, or_
-        rules = and_(*[ or_(Post.title.ilike('%%%s%%' % k), Post.summary.ilike('%%%s%%' % k), Post.content.ilike('%%%s%%' % k)) for k in keywords ])
+        rules = and_(
+            *[or_(Post.title.ilike('%%%s%%' % k), Post.summary.ilike('%%%s%%' % k), Post.content.ilike('%%%s%%' % k))
+              for k in keywords])
         pagination = Post.query.filter(rules).order_by(Post.date.desc()).paginate(
             page=page, per_page=current_app.config['FMBLOG_PER_PAGE'])
-    except:
-        return render_template('404.html', e='Error: Empty Keyword', site=current_app.config['FMBLOG_SITE'], value={}),404
+    except Exception:
+        return render_template('404.html', e='Error: Empty Keyword', site=current_app.config['FMBLOG_SITE'],
+                               value={}), 404
     return render_template('search.html', value={'keyword': keyword},
                            pagination=pagination, endpoint='main.search',
                            page_list=get_page_list(pagination, page),
@@ -146,20 +148,20 @@ def blog(post_name):
     ptt = []
     pct = []
     for i in Counter(pt).items():
-        ptt.append((i[0],i[1]))
+        ptt.append((i[0], i[1]))
     for i in Counter(pc).items():
         pct.append((i[0], i[1]))
-    ptt.sort(key=lambda item:item[0].date, reverse=True)
-    ptt.sort(key=lambda item:item[1], reverse=True)
-    pct.sort(key=lambda item: abs(item[0].date-post.date))
-    pt=[x[0] for x in ptt]
+    ptt.sort(key=lambda item: item[0].date, reverse=True)
+    ptt.sort(key=lambda item: item[1], reverse=True)
+    pct.sort(key=lambda item: abs(item[0].date - post.date))
+    pt = [x[0] for x in ptt]
     pc = [x[0] for x in pct]
-    if len(pt)>7:
+    if len(pt) > 7:
         pt = pt[:7]
-    if len(pc)>7:
+    if len(pc) > 7:
         pc = pc[:7]
     pct.sort(key=lambda item: item[0].date, reverse=True)
-    value={}
+    value = {}
     return render_template('blog.html',
                            post=post,
                            posts_tag=pt,

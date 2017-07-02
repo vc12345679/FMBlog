@@ -82,7 +82,6 @@ class Blog:
 
     @classmethod
     def get_blog(cls, file_name):
-        txt = ''
         if cls.is_exist(file_name):
             with open(cls._real_file_name(file_name), 'r', encoding='utf-8') as f:
                 txt = f.read()
@@ -100,7 +99,6 @@ class Blog:
                 return
         else:
             return
-
 
     @classmethod
     def add(cls, file_name):
