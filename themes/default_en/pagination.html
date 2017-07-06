@@ -100,7 +100,6 @@
 {% macro render_pagination(pagination, endpoint, value)%}
 	<div class="card-block p-a-0 text-left m-b">
 		<div>
-			<span class="p-l"><i class="fa fa-info-circle"></i></span>
 			{% block pagination_desc%}{% endblock %}<span> {{ pagination.total }} post(s) in total. Showing No. 
 				{% if pagination.total == 0 %}
 				0
